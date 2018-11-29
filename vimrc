@@ -5,6 +5,32 @@
 " Consider cleaning up:
 " https://stackoverflow.com/questions/2889766/best-way-to-organize-filetype-settings-in-vim-and-vimrc#2890444
 
+" Vundle
+" ------
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+set nocompatible
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Plugins (must be added before vundle#end())
+Plugin 'VundleVim/Vundle.vim'       " Vundle itself
+Plugin 'LaTeX-Box-Team/LaTeX-Box'   " LaTeX-Box
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
+
 " Determine the OS for OS specific settings. Use as:
 "
 "   if os == 'Darwin' || os == 'Mac'
