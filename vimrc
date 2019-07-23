@@ -50,7 +50,7 @@ set expandtab
 "if has("gui_gtk")
 if has("gui_running")
     set number                 " Show line numbers by default
-    set lines=999 columns=999  " Fullscreen; TODO: Should rather be 'recover last pos/size'
+    "set lines=999 columns=999  " Fullscreen; TODO: Should rather be 'recover last pos/size' TODO: Makes gvim crash in Ubuntu 18.04 LTS; hence we disable it.
 
 "    highlight ColorColumn ctermbg=gray
 "    set colorcolumn=80
