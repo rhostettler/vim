@@ -24,11 +24,12 @@ call vundle#begin()
 " Plugins (must be added before vundle#end())
 Plugin 'VundleVim/Vundle.vim'       " Vundle itself
 Plugin 'LaTeX-Box-Team/LaTeX-Box'   " LaTeX-Box
+Plugin 'tpope/vim-surround'         " Surround
 
 call vundle#end()            " required
-filetype plugin indent on    " required
+"filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on
 
 
 " Determine the OS for OS specific settings. Use as:
@@ -46,6 +47,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" Indentation
+set autoindent nosmartindent
+
 " Adjust the window- and font size when using gvim
 "if has("gui_gtk")
 if has("gui_running")
@@ -60,6 +64,29 @@ if has("gui_running")
         set guifont=Monospace\ 12  " TODO: I might consider making this host-dependent
         set guioptions-=T           " Remove toolbar
         " set guioptions-=m           " Remove menubar
+        "
+
+        " Map Alt-# to tab switching (similar to Gnome terminal and Firefox),
+        " but only on Linux and in GUI mode to avoid interfering with the same
+        " functionality in Gnome terminal.
+        noremap <M-1> 1gt
+        noremap <M-2> 2gt
+        noremap <M-3> 3gt
+        noremap <M-4> 4gt
+        noremap <M-5> 5gt
+        noremap <M-6> 6gt
+        noremap <M-7> 7gt
+        noremap <M-8> 8gt
+        noremap <M-9> 9gt
+
+        " Ctrl+Shift+V for paste from system buffer
+"        noremap <C-S-V> "+gP
+"        inoremap <C-S-V> <Esc>"+gPa
+
+        " Open new tab with Ctrl+t
+        noremap <silent> <C-T> :tabnew<CR>
+        vnoremap <silent> <C-T> <C-C>:tabnew<CR>
+        inoremap <silent> <C-T> <C-O>:tabnew<CR>
     endif
 
     " MacOS specific GUI settings
@@ -108,7 +135,7 @@ function! Complete_Tab_LaTeX()
     " Check if the last character prior to the cursor is a backslash or curly
     " brace
     let has_input = match(substr, '\\input{') != -1
-    let has_include = match(substr, '\\include{') != -1
+    let has_include = match(substr, '\\include') != -1
     let has_backslash = match(substr, '\\') != -1
     let has_curlybrace_open = match(substr, '{') != -1
     if (has_input || has_include)
@@ -140,7 +167,7 @@ inoremap <silent> <C-S> <C-O>:update<CR>
 
 " Ctrl-v for paste, see https://superuser.com/questions/61226/configure-vim-for-copy-and-paste-keyboard-shortcuts-from-system-buffer-in-ubuntu
 " TODO: Doesn't work in insert mode yet
-map <C-v> "+gP
+"map <C-v> "+gP
 
 " Shift-tab for unindent
 inoremap <S-Tab> <C-d>
@@ -158,8 +185,8 @@ inoremap <S-Tab> <C-d>
 
 " Automatically closing brackets
 " https://stackoverflow.com/questions/21316727/automatic-closing-brackets-for-vim#34992101
-inoremap " ""<left>
-inoremap ' ''<left>
+" inoremap " ""<left>
+" inoremap ' ''<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
@@ -186,4 +213,7 @@ command SWD cd %:p:h
 
 " {S}et {F}iletype to {L}aTeX
 command SFL set filetype=tex
+
+" Remap {W} to w (I'm always too fast)
+command W w
 
