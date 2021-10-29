@@ -31,6 +31,11 @@ call vundle#end()            " required
 " To ignore plugin indent changes, instead use:
 filetype plugin on
 
+" Easier copy to clipboard
+" See https://stackoverflow.com/questions/4532110/gvim-easy-copying-into-system-clipboard
+nnoremap y "+y
+vnoremap y "+y
+set clipboard=unnamedplus
 
 " Determine the OS for OS specific settings. Use as:
 "
